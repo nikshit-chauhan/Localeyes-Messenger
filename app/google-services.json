@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "202468465876",
+    "project_id": "localeyesmessenger-9bd6f",
+    "storage_bucket": "localeyesmessenger-9bd6f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202468465876:android:312ae8c0c18f46f7c72f41",
+        "android_client_info": {
+          "package_name": "com.example.kotlinmessenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "202468465876-d9u89luqdg9ojb6i9a4606qn0kst3rka.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA67EhQO8TRi9jHyylqwLp7f7bHKap7mxw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "202468465876-d9u89luqdg9ojb6i9a4606qn0kst3rka.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

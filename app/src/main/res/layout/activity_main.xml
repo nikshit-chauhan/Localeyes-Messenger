@@ -7,14 +7,26 @@
     android:background="@android:color/holo_green_light"
     tools:context=".MainActivity" >
 
+    <Button
+        android:id="@+id/btn_Image"
+        android:layout_width="162dp"
+        android:layout_height="162dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/circular_image_btn"
+        android:text="Select Photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.445"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/ed_userName_register"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="32dp"
-        android:background="@android:color/white"
+        android:background="@drawable/rounded_edit_text_register"
         android:ems="10"
         android:hint="UserName"
         android:inputType="textPersonName"
@@ -23,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_Image" />
 
     <EditText
         android:id="@+id/ed_email_register"
@@ -32,7 +44,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:background="@android:color/white"
+        android:background="@drawable/rounded_edit_text_register"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
@@ -48,7 +60,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:background="@android:color/white"
+        android:background="@drawable/rounded_edit_text_register"
         android:ems="10"
         android:hint="password"
         android:inputType="textPassword"
@@ -61,8 +73,10 @@
         android:id="@+id/btn_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
+        android:background="@drawable/rounded_btn"
         android:gravity="center"
         android:text="REGISTER"
         app:layout_constraintEnd_toEndOf="@+id/ed_password_register"
@@ -85,4 +99,6 @@
         app:layout_constraintHorizontal_bias="0.256"
         app:layout_constraintStart_toStartOf="@+id/btn_register"
         app:layout_constraintTop_toBottomOf="@+id/btn_register" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
