@@ -5,17 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/holo_green_light"
-    tools:context=".MainActivity" >
+    tools:context=".RegisterActivity" >
 
     <Button
         android:id="@+id/btn_Image"
-        android:layout_width="162dp"
-        android:layout_height="162dp"
-        android:layout_marginTop="25dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/circular_image_btn"
         android:text="Select Photo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.445"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -99,6 +99,16 @@
         app:layout_constraintHorizontal_bias="0.256"
         app:layout_constraintStart_toStartOf="@+id/btn_register"
         app:layout_constraintTop_toBottomOf="@+id/btn_register" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/photo_imageView_register"
+        android:layout_width="150dp"
+        app:civ_border_width="4dp"
+        android:layout_height="150dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_Image"
+        app:layout_constraintEnd_toEndOf="@+id/btn_Image"
+        app:layout_constraintStart_toStartOf="@+id/btn_Image"
+        app:layout_constraintTop_toTopOf="@+id/btn_Image" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
