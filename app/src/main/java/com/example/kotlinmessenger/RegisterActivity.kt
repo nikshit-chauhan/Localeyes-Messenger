@@ -25,8 +25,6 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -67,9 +65,6 @@ class RegisterActivity : AppCompatActivity() {
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
             val photo = findViewById<CircleImageView>(R.id.photo_imageView_register).setImageBitmap(bitmap)
             findViewById<Button>(R.id.btn_Image).alpha = 0f
-
-
-
         }
     }
 
@@ -84,18 +79,13 @@ class RegisterActivity : AppCompatActivity() {
 
         Log.d("Main Activity", "Email.is: $email")
         Log.d("Main Activity", "Password: $password")
-
-
-        //Firebase Authentication to create new User with email and password
-
+       //Firebase Authentication to create new User with email and password
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener{
                 if(!it.isSuccessful) {
                     Log.d("firebase", "User NOt created")
                     return@addOnCompleteListener
                 }
-
-
                 //else if successful
                 Log.d("firebase", "User created with uid ${it.result.user?.uid}")
                 uploadImageToFirebaseStorage()
@@ -137,6 +127,11 @@ class RegisterActivity : AppCompatActivity() {
         ref.setValue(user)
             .addOnSuccessListener {
                 Log.d("register Activity", "Finally we saved the user to firebase database")
+
+                val intent = Intent(this, LatestMessagesActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+
             }
             .addOnFailureListener {
                 Log.d("register Activity", "user not saved in firebase database")
