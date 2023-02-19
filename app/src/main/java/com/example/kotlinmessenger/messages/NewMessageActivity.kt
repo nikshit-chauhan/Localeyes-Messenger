@@ -1,4 +1,4 @@
-package com.example.kotlinmessenger
+package com.example.kotlinmessenger.messages
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kotlinmessenger.messages.ChatLogActivity
+import com.example.kotlinmessenger.R
 
 import com.example.kotlinmessenger.modules.User
 
@@ -32,7 +32,7 @@ class NewMessageActivity : AppCompatActivity() {
     }
 
     companion object{
-        val USER_KEY = "USER_KEY"
+        const val USER_KEY = "USER_KEY"
     }
     private fun fetchUser() {
         val ref = FirebaseDatabase.getInstance().getReference("/user")
@@ -75,7 +75,9 @@ class UserItem(val user: User): Item<GroupieViewHolder>(){
         override fun bind(viewHolder: GroupieViewHolder, position: Int) {
             viewHolder.itemView.findViewById<TextView>(R.id.tv_user_name_newMessage).text = user.username
 
-            Picasso.get().load(user.profileImageUrl).into(viewHolder.itemView.findViewById<CircleImageView>(R.id.imageView_newMessage_row))
+            Picasso.get().load(user.profileImageUrl).into(viewHolder.itemView.findViewById<CircleImageView>(
+                R.id.imageView_newMessage_row
+            ))
 
         }
 
