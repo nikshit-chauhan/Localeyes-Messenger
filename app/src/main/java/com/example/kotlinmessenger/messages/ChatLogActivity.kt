@@ -49,10 +49,13 @@ class ChatLogActivity : AppCompatActivity() {
     }
 
     private fun listenForMessages() {
-        val ref = FirebaseDatabase.getInstance().getReference("/Messages")
+        val fromId = FirebaseAuth.getInstance().uid
+        val toId = toUser?.uid
+        val ref = FirebaseDatabase.getInstance().getReference("/user-message/$fromId/$toId")
 
-        ref.addChildEventListener(object: ChildEventListener{
-            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+       ref.addChildEventListener(object: ChildEventListener{
+
+             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val chatMessage = snapshot.getValue(ChatMessage::class.java)
                 if(chatMessage != null){
                     Log.d(TAG, chatMessage.text)
@@ -64,6 +67,8 @@ class ChatLogActivity : AppCompatActivity() {
                             adapter.add(ChatToItem(chatMessage.text, toUser!!))
 
                     }
+                }else{
+                    Log.d("Debug", "chatMessage is null")
                 }
 
 
@@ -94,19 +99,23 @@ class ChatLogActivity : AppCompatActivity() {
         toUser = intent.getParcelableExtra(NewMessageActivity.USER_KEY)
         val toId = toUser?.uid
         if(fromId == null) return
-//        val ref = FirebaseDatabase.getInstance().getReference("/Messages").push()
+
         val ref = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
+        val toRef = FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push()
 
         val chatMessage = ChatMessage(ref.key!!,messageText, fromId, toId!!, System.currentTimeMillis() / 1000)
-        ref.setValue(chatMessage)
+         ref.setValue(chatMessage)
             .addOnSuccessListener {
                 Log.d(TAG, "Message sent to database ${ref.key}")
+                findViewById<EditText>(R.id.et_type_chat_log).text.clear()
+                findViewById<RecyclerView>(R.id.rv_Chat_Log).scrollToPosition(adapter.itemCount-1)
             }
+        toRef.setValue(chatMessage)
     }
 }
 class ChatFromItem(val text: String, val user: User): Item<GroupieViewHolder>(){
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        viewHolder.itemView.findViewById<TextView>(R.id.tv_msg_received).text = text
+       viewHolder.itemView.findViewById<TextView>(R.id.tv_msg_received).text = text
 
         val uri = user.profileImageUrl
         val targetImageView = viewHolder.itemView.findViewById<CircleImageView>(R.id.imageView_CurrentUser)

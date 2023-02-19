@@ -14,6 +14,7 @@
         android:maxWidth="240dp"
         android:padding="16dp"
         android:text="New Message to sender..checking if overflows to new window and how it looks in app emulator"
+        android:textColor="@android:color/black"
         app:layout_constraintStart_toEndOf="@+id/imageView_otherUser"
         app:layout_constraintTop_toTopOf="@+id/imageView_otherUser" />
 

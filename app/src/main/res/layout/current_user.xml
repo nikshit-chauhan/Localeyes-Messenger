@@ -12,6 +12,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_edit_text_register"
         android:maxWidth="240dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:padding="16dp"
         android:text="New Message from sender here"
         app:layout_constraintEnd_toStartOf="@+id/imageView_CurrentUser"
