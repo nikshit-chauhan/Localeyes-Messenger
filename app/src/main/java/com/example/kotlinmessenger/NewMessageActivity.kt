@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.Recycler
 
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
@@ -14,10 +16,12 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Picasso
 import com.xwray.groupie.Group
 import com.xwray.groupie.GroupieAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
+import de.hdodenhof.circleimageview.CircleImageView
 
 
 class NewMessageActivity : AppCompatActivity() {
@@ -35,6 +39,7 @@ class NewMessageActivity : AppCompatActivity() {
 
         fetchUser()
     }
+
 
     private fun fetchUser() {
         val ref = FirebaseDatabase.getInstance().getReference("/user")
@@ -61,10 +66,19 @@ class NewMessageActivity : AppCompatActivity() {
     }
 }
 
-class UserItem(val user: User): Item<ViewHolder>(){
 
+class UserItem(val user: User): Item<GroupieViewHolder>(){
+        override fun bind(viewHolder: GroupieViewHolder, position: Int) {
+        viewHolder.itemView.findViewById<TextView>(R.id.tv_user_name_newMessage).text = user.username
+
+            Picasso.get().load(user.profileImageUrl).into(viewHolder.itemView.findViewById<CircleImageView>(R.id.imageView_newMessage_row))
+
+        }
+
+    override fun getLayout(): Int {
+        return R.layout.user_row_new_message
+    }
 
 }
-
 
 
