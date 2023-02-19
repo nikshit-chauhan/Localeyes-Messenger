@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">KotlinMessenger</string>
+    <string name="send">Send</string>
+    <string name="enter_message">enter message</string>
 </resources>
