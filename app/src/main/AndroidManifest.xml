@@ -15,6 +15,9 @@
         android:theme="@style/Theme.KotlinMessenger"
         android:usesCleartextTraffic="true"
         tools:targetApi="29">
+        <activity
+            android:name=".DeviceRegistrationToken"
+            android:exported="false" />
         <activity android:name=".messages.NewMessageActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -32,11 +35,11 @@
         <activity android:name=".messages.ChatLogActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".messages.LatestMessagesActivity"/>
+                android:value=".messages.LatestMessagesActivity" />
         </activity>
         <activity
             android:name=".RegisterLogin.RegisterActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity android:name=".RegisterLogin.LoginActivity" />
     </application>
 

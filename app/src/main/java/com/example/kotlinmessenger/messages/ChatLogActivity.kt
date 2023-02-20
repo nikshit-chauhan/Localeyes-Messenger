@@ -6,15 +6,19 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinmessenger.R
+
 import com.example.kotlinmessenger.modules.ChatMessage
 import com.example.kotlinmessenger.modules.User
+
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupieAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -24,9 +28,10 @@ import de.hdodenhof.circleimageview.CircleImageView
 class ChatLogActivity : AppCompatActivity() {
 
     companion object{
-        const val TAG = "ChatLog"
+        const val TAG = "registration"
     }
     private val adapter = GroupieAdapter()
+
     var toUser : User? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,8 +50,8 @@ class ChatLogActivity : AppCompatActivity() {
             Log.d(TAG, "send button pressed")
             performSendMessage()
         }
-
     }
+
 
     private fun listenForMessages() {
         val fromId = FirebaseAuth.getInstance().uid
@@ -70,8 +75,7 @@ class ChatLogActivity : AppCompatActivity() {
                 }else{
                     Log.d("Debug", "chatMessage is null")
                 }
-
-
+                 findViewById<RecyclerView>(R.id.rv_Chat_Log).scrollToPosition(adapter.itemCount - 1)
             }
 
             override fun onCancelled(error: DatabaseError) {

@@ -6,11 +6,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinmessenger.R
 import com.example.kotlinmessenger.RegisterLogin.RegisterActivity
 import com.example.kotlinmessenger.modules.ChatMessage
+import com.example.kotlinmessenger.modules.LatestMessageRow
 import com.example.kotlinmessenger.modules.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
@@ -18,14 +21,17 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupieAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
+import de.hdodenhof.circleimageview.CircleImageView
 
 class LatestMessagesActivity : AppCompatActivity() {
 
     companion object{
         var currentUser : User? = null
+        val TAG = "Latest Message"
     }
     private val adapter = GroupieAdapter()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +39,16 @@ class LatestMessagesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_latest_messages)
 
         findViewById<RecyclerView>(R.id.rv_latest_message).adapter = adapter
+        findViewById<RecyclerView>(R.id.rv_latest_message).addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+
+        adapter.setOnItemClickListener { item, view ->
+            val row = item as LatestMessageRow
+
+            Log.d(TAG, "usernameeee")
+            val intent = Intent(this, ChatLogActivity::class.java)
+            intent.putExtra(NewMessageActivity.USER_KEY, row.chatPartnerUser)
+            startActivity(intent)
+        }
 
         listenForLatestMessage()
 
@@ -40,14 +56,7 @@ class LatestMessagesActivity : AppCompatActivity() {
 
         verifyUserIsLoggedIn()
     }
-    class LatestMessageRow(val chatMessage: ChatMessage): Item<GroupieViewHolder>(){
-        override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-            viewHolder.itemView.findViewById<TextView>(R.id.tv_latest_message).text = chatMessage.text
-        }
-        override fun getLayout(): Int {
-            return R.layout.latest_message_row
-        }
-    }
+
 
     val latestMessageMap = HashMap<String, ChatMessage>()
 

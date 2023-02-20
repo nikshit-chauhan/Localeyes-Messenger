@@ -6,8 +6,10 @@
     android:layout_height="120dp"
    >
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_latest_message"
+        app:civ_border_color="@android:color/white"
+        app:civ_border_width="2dp"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="24dp"
@@ -23,7 +25,7 @@
         android:layout_marginStart="16dp"
         android:textStyle="bold"
         android:textSize="18sp"
-        android:text="User Name"
+        tools:text="User Name"
         app:layout_constraintBottom_toTopOf="@+id/tv_latest_message"
         app:layout_constraintStart_toEndOf="@+id/iv_latest_message"
         app:layout_constraintTop_toTopOf="parent"
@@ -37,7 +39,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:textSize="15sp"
-        android:text="Latest Message"
+        tools:text="Latest Message"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

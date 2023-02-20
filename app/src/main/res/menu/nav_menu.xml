@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/menu_new_message"
-        android:title="New Message"
-        app:showAsAction="ifRoom"/>
+        android:icon="@drawable/new_message_icon"
+        app:showAsAction="ifRoom"
+        android:title="new message icon" />
 
     <item android:id="@+id/sign_out"
         android:title="Sign Out"
