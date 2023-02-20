@@ -51,7 +51,7 @@ class ChatLogActivity : AppCompatActivity() {
     private fun listenForMessages() {
         val fromId = FirebaseAuth.getInstance().uid
         val toId = toUser?.uid
-        val ref = FirebaseDatabase.getInstance().getReference("/user-message/$fromId/$toId")
+        val ref = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId")
 
        ref.addChildEventListener(object: ChildEventListener{
 
@@ -77,15 +77,12 @@ class ChatLogActivity : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {
 
             }
-
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
 
             }
-
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
 
             }
-
             override fun onChildRemoved(snapshot: DataSnapshot) {
 
             }
@@ -101,6 +98,7 @@ class ChatLogActivity : AppCompatActivity() {
         if(fromId == null) return
 
         val ref = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
+
         val toRef = FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push()
 
         val chatMessage = ChatMessage(ref.key!!,messageText, fromId, toId!!, System.currentTimeMillis() / 1000)
@@ -111,6 +109,12 @@ class ChatLogActivity : AppCompatActivity() {
                 findViewById<RecyclerView>(R.id.rv_Chat_Log).scrollToPosition(adapter.itemCount-1)
             }
         toRef.setValue(chatMessage)
+
+        val latestMessageRef = FirebaseDatabase.getInstance().getReference("/latest-messages/$fromId/$toId")
+        latestMessageRef.setValue(chatMessage)
+
+        val latestMessageRef2 = FirebaseDatabase.getInstance().getReference("/latest-messages/$toId/$fromId")
+        latestMessageRef2.setValue(chatMessage)
     }
 }
 class ChatFromItem(val text: String, val user: User): Item<GroupieViewHolder>(){
